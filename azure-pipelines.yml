@@ -1,0 +1,24 @@
+# ASP.NET Core
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'LEGO Devs(f2e86c57-6440-4e5c-89fe-13fdd6c6689a)'
+    appType: 'webApp'
+    appName: 'app-copa-lego'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
